@@ -17,7 +17,7 @@ jobs:
       - name: Run release-please
         shell: bash
         run: |
-          for command in manifest-pr manifest-release; do
+          for command in release-pr manifest-release; do
             release-please --debug "${command}" --token="${{ github.token }}" --repo-url="CBenoit/actions-tests"
           done
 
