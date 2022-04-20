@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize, reopened ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  formatting:
+    name: Check formatting
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Check formatting
+        shell: pwsh
+        run: |
+          Write-Host "Check formatting"
+          cargo fmt --all -- --check
+
+          if ($LastExitCode -eq 1) {   
+            throw "Bad formatting, please run 'cargo +stable fmt --all'"
+          }
+
+  tests:
+    name: Tests
+    needs: formatting
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/registry/
+          ~/.cargo/git/
+          ./target/
+        key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Run tests
+      run: cargo test --verbose --workspace --all-features
+          
+  lints:
+    name: Lints
+    runs-on: ubuntu-18.04
+    needs: formatting
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry/
+            ~/.cargo/git/
+            ./target/
+          key: ${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
+      
+      - name: Check clippy
+        run: cargo clippy --workspace --all-features
