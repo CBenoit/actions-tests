@@ -24,7 +24,7 @@ jobs:
         run: |
           $DryRunArg = ""  
 
-          if (-Not [string]::IsNullOrWhiteSpace(${{ github.event.inputs.dryRun }}))
+          if (-Not [string]::IsNullOrWhiteSpace("${{ github.event.inputs.dryRun }}"))
           {
             $DryRunArg = "--dry-run"
           }
