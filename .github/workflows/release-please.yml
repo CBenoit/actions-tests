@@ -1,0 +1,23 @@
+name: Release please
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  release-please:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install release-please
+        run: npm install --global release-please@13.14.0
+      
+      - name: Run release-please
+        shell: bash
+        run: |
+          for command in manifest-pr manifest-release; do
+            release-please --debug "${command}" --token "${{ github.token }}"
+          done
+
