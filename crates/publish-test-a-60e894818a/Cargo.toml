@@ -1,0 +1,6 @@
+[package]
+name = "publish-test-a-60e894818a"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
