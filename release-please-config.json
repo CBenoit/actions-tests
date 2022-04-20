@@ -3,8 +3,7 @@
   "plugins": ["cargo-workspace"],
   "release-type": "rust",
   "packages": {
-    "crates/foo": {},
-    "crates/bar": {},
-    "crates/baz": {}
+    "crates/publish-test-a-60e894818a": {},
+    "crates/publish-test-b-4347e0f632": {},
   }
 }
