@@ -7,4 +7,4 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/CBenoit/actions-tests"
 
 [dependencies]
-publish-test-a-60e894818a = { version = "0.1.0", path = "../publish-test-a-60e894818a" }
+publish-test-a-60e894818a = { version = "0.2.0", path = "../publish-test-a-60e894818a" }
