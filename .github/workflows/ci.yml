@@ -46,7 +46,7 @@ jobs:
         key: ${{ runner.os }}-${{ github.job }}-${{ hashFiles('Cargo.lock') }}
 
     - name: Run tests
-      run: cargo test --verbose --workspace --all-features
+      run: cargo test --locked --verbose --workspace --all-features
           
   lints:
     name: Lints
@@ -66,4 +66,4 @@ jobs:
           key: ${{ runner.os }}-${{ github.job }}-${{ hashFiles('Cargo.lock') }}
       
       - name: Run clippy
-        run: cargo clippy --workspace --all-features -- -D warnings
+        run: cargo clippy --locked --workspace --all-features -- -D warnings
