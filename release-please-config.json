@@ -4,6 +4,6 @@
   "release-type": "rust",
   "packages": {
     "crates/publish-test-a-60e894818a": {},
-    "crates/publish-test-b-4347e0f632": {},
+    "crates/publish-test-b-4347e0f632": {}
   }
 }
