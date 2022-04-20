@@ -3,6 +3,11 @@ name: Release please
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      dryRun:
+        default: false
+        type: boolean
 
 jobs:
   release-please:
@@ -15,7 +20,14 @@ jobs:
         run: npm install --global release-please@13.14.0
       
       - name: Run release-please
-        shell: bash
+        shell: pwsh
         run: |
-          release-please --debug release-pr --token="${{ github.token }}" --repo-url="CBenoit/actions-tests"
+          $DryRunArg = ""  
+
+          if (-Not [string]::IsNullOrWhiteSpace(${{ github.event.inputs.dryRun }}))
+          {
+            $DryRunArg = "--dry-run"
+          }
+
+          release-please --debug "$DryRunArg" release-pr --token="${{ github.token }}" --repo-url="CBenoit/actions-tests"
 
