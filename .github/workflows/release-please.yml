@@ -23,11 +23,15 @@ jobs:
         shell: pwsh
         run: |
           $DryRunArg = ""  
+        
+          Write-Host "${{ github.event.inputs.dryRun }}"
 
           if (-Not [string]::IsNullOrWhiteSpace("${{ github.event.inputs.dryRun }}"))
           {
             $DryRunArg = "--dry-run"
           }
+        
+          Write-Host "$DryRunArg"
 
           release-please --debug release-pr --token="${{ github.token }}" --repo-url="CBenoit/actions-tests" "$DryRunArg"
 
