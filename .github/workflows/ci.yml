@@ -80,7 +80,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install cargo-workspaces
-        run: cargo install --locked cargo-workspaces
+        run: cargo install --debug --locked cargo-workspaces
+        # cargo-workspaces is installed in debug because it's faster to compile and we don't need execution speed.
       
       - name: Run cargo workspaces publish
         run: cargo workspaces publish --from-git --token "${{ secrets.CRATES_IO_DEVOLUTIONSBOT_API_KEY }}" --yes
