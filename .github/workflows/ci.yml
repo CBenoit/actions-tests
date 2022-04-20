@@ -65,5 +65,5 @@ jobs:
             ./target/
           key: ${{ runner.os }}-${{ github.job }}-${{ hashFiles('Cargo.lock') }}
       
-      - name: Check clippy
+      - name: Run clippy
         run: cargo clippy --workspace --all-features -- -D warnings
