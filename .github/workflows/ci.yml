@@ -35,19 +35,19 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Cache
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/.cargo/registry/
-          ~/.cargo/git/
-          ./target/
-        key: ${{ runner.os }}-${{ github.job }}-${{ hashFiles('Cargo.lock') }}
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry/
+            ~/.cargo/git/
+            ./target/
+          key: ${{ runner.os }}-${{ github.job }}-${{ hashFiles('Cargo.lock') }}
 
-    - name: Run tests
-      run: cargo test --locked --verbose --workspace --all-features
+      - name: Run tests
+        run: cargo test --locked --verbose --workspace --all-features
           
   lints:
     name: Lints
@@ -78,6 +78,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry/
+            ~/.cargo/git/
+          key: cargo-install
 
       - name: Install cargo-workspaces
         run: cargo install --debug --locked cargo-workspaces
