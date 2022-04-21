@@ -33,7 +33,7 @@ jobs:
             $Args += @('--dry-run')
           }
 
-          $Cmd = $(@('cargo') + $CargoArgs) -Join ' '
+          $Cmd = $(@('release-please') + $Args) -Join ' '
           Write-Host $Cmd
 
           Invoke-Expression $Cmd
