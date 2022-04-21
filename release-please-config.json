@@ -1,7 +1,8 @@
 {
-  "bootstrap-sha": "COMMIT_SHA_BEFORE_RELEASE_PLEASE",
+  "bootstrap-sha": "60c6c6cdc67e97fd4ea32add87da056779cb8b1e",
   "plugins": ["cargo-workspace"],
   "release-type": "rust",
+  "bump-minor-pre-major": true,
   "packages": {
     "crates/publish-test-a-60e894818a": {},
     "crates/publish-test-b-4347e0f632": {}
