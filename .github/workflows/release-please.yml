@@ -22,17 +22,19 @@ jobs:
       - name: Run release-please
         shell: pwsh
         run: |
-          $DryRunArg = ""  
-        
-          Write-Host "inputs.dryRun value = ${{ github.event.inputs.dryRun }}"
+          $Args = @('--debug')
+          $Args += @('release-pr')
+          $Args += @('--token', '${{ github.token }}')
+          $Args += @('--repo-url', 'CBenoit/actions-tests')
 
           if (-Not [string]::IsNullOrWhiteSpace("${{ github.event.inputs.dryRun }}"))
           {
             Write-Host "Executing a dry run"
-            $DryRunArg = "--dry-run"
+            $Args += @('--dry-run')
           }
-        
-          Write-Host "DryRunArg = $DryRunArg"
 
-          release-please --debug release-pr --token="${{ github.token }}" --repo-url="CBenoit/actions-tests" "$DryRunArg"
+          $Cmd = $(@('cargo') + $CargoArgs) -Join ' '
+          Write-Host $Cmd
+
+          Invoke-Expression $Cmd
 
