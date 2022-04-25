@@ -1,11 +1,14 @@
 {
   "bootstrap-sha": "60c6c6cdc67e97fd4ea32add87da056779cb8b1e",
-  "last-release-sha": "481bcfa609d3da31312b24f78cad0fd39a69c07b",
   "plugins": ["cargo-workspace"],
   "release-type": "rust",
   "bump-minor-pre-major": true,
   "packages": {
-    "crates/publish-test-a-60e894818a": {},
-    "crates/publish-test-b-4347e0f632": {}
+    "crates/publish-test-a-60e894818a": {
+      "package-name": "a"
+    },
+    "crates/publish-test-b-4347e0f632": {
+      "package-name": "b"
+    }
   }
 }
