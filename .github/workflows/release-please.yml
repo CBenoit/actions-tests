@@ -19,11 +19,30 @@ jobs:
       - name: Install release-please
         run: npm install --global release-please@13.14.0
       
-      - name: Run release-please
+      - name: Run release-pr
         shell: pwsh
         run: |
           $Args = @('--debug')
           $Args += @('release-pr')
+          $Args += @('--token', '${{ github.token }}')
+          $Args += @('--repo-url', 'CBenoit/actions-tests')
+
+          if (-Not [string]::IsNullOrWhiteSpace("${{ github.event.inputs.dryRun }}"))
+          {
+            Write-Host "Executing a dry run"
+            $Args += @('--dry-run')
+          }
+
+          $Cmd = $(@('release-please') + $Args) -Join ' '
+          Write-Host $Cmd
+
+          Invoke-Expression $Cmd
+
+      - name: Run github-release
+        shell: pwsh
+        run: |
+          $Args = @('--debug')
+          $Args += @('github-release')
           $Args += @('--token', '${{ github.token }}')
           $Args += @('--repo-url', 'CBenoit/actions-tests')
 
